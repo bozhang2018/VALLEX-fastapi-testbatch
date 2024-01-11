@@ -601,7 +601,7 @@ class VALLE(VALLF):
                 #     y = worst_beam.unsqueeze(0)
                 # else:
                 #     y = best_beam.unsqueeze(0)
-                print(f"VALL-E EOS [{prompts.shape[1]} -> {y.shape[1]} - {y.shape[0]} ]") # show batch_size at the end
+                print(f"VALL-E EOS [{y.shape[0]} -> {y.shape[1]}]") # show batch_size
                 break
 
             y = torch.concat([y, samples], dim=1)
@@ -695,7 +695,7 @@ class VALLE(VALLF):
                     y_emb[:, prefix_len:] += embedding_layer(samples)
 
         assert len(codes) == self.num_quantizers
-        print(f"VALL-E NAR [{codes.shape[0]} - {codes.shape[1]} ]") # show batch_size
+        print(f"VALL-E NAR [{codes.shape[0]} -> {codes.shape[1]}]") # show batch_size
         return torch.stack(codes, dim=-1)
 
     def continual(

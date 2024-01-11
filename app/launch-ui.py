@@ -294,7 +294,7 @@ def infer_from_audio(text, language, accent, audio_prompt, record_audio_prompt, 
         temperature=1,
         prompt_language=lang_pr,
         text_language=langs if accent == "no-accent" else lang,
-        best_of=5,
+        best_of=1,
     )
     # Decode with Vocos
     frames = encoded_frames.permute(2,0,1)
@@ -355,7 +355,7 @@ def infer_from_prompt(text, language, accent, preset_prompt, prompt_file):
         temperature=1,
         prompt_language=lang_pr,
         text_language=langs if accent == "no-accent" else lang,
-        best_of=5,
+        best_of=1,
     )
     # Decode with Vocos
     frames = encoded_frames.permute(2,0,1)
@@ -446,7 +446,7 @@ def infer_long_text(text, preset_prompt, prompt=None, language='auto', accent='n
                 temperature=1,
                 prompt_language=lang_pr,
                 text_language=langs if accent == "no-accent" else lang,
-                best_of=5,
+                best_of=1,
             )
             complete_tokens = torch.cat([complete_tokens, encoded_frames.transpose(2, 1)], dim=-1)
         # Decode with Vocos
@@ -490,7 +490,7 @@ def infer_long_text(text, preset_prompt, prompt=None, language='auto', accent='n
                 temperature=1,
                 prompt_language=lang_pr,
                 text_language=langs if accent == "no-accent" else lang,
-                best_of=5,
+                best_of=1,
             )
             complete_tokens = torch.cat([complete_tokens, encoded_frames.transpose(2, 1)], dim=-1)
             if torch.rand(1) < 1.0:
