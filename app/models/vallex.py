@@ -530,7 +530,7 @@ class VALLE(VALLF):
         kv_cache = None
         use_kv_caching = True
 
-        sum_logprobs = torch.zeros(best_of, device=y.device)  # implement batch decoding here
+        sum_logprobs = torch.zeros(2*best_of, device=y.device)  # implement batch decoding here, batch_size = 2
         x = x.repeat(best_of, 1, 1)
         y = y.repeat(best_of, 1)
         while True:
@@ -590,17 +590,18 @@ class VALLE(VALLF):
                     )
                 lengths = torch.sum(y != NUM_AUDIO_TOKENS, dim=1)
                 avg_logprobs = sum_logprobs / lengths ** length_penalty
-                # choose the best beam according to sum_logprobs
-                best_beam = y[torch.argmax(avg_logprobs), :]
-                worst_beam = y[torch.argmin(avg_logprobs), :]
-                # strip all eos tokens
-                best_beam = best_beam[best_beam != NUM_AUDIO_TOKENS]
-                worst_beam = worst_beam[worst_beam != NUM_AUDIO_TOKENS]
-                if return_worst:
-                    y = worst_beam.unsqueeze(0)
-                else:
-                    y = best_beam.unsqueeze(0)
-                print(f"VALL-E EOS [{prompts.shape[1]} -> {y.shape[1]}]")
+                # has to remove beam search tempararily
+                # # choose the best beam according to sum_logprobs
+                # best_beam = y[torch.argmax(avg_logprobs), :]
+                # worst_beam = y[torch.argmin(avg_logprobs), :]
+                # # strip all eos tokens
+                # best_beam = best_beam[best_beam != NUM_AUDIO_TOKENS]
+                # worst_beam = worst_beam[worst_beam != NUM_AUDIO_TOKENS]
+                # if return_worst:
+                #     y = worst_beam.unsqueeze(0)
+                # else:
+                #     y = best_beam.unsqueeze(0)
+                print(f"VALL-E EOS [{prompts.shape[1]} -> {y.shape[1]} - {y.shape[0]} ]") # show batch_size at the end
                 break
 
             y = torch.concat([y, samples], dim=1)
@@ -694,6 +695,7 @@ class VALLE(VALLF):
                     y_emb[:, prefix_len:] += embedding_layer(samples)
 
         assert len(codes) == self.num_quantizers
+        print(f"VALL-E NAR [{codes.shape[0]} - {codes.shape[1]} ]") # show batch_size
         return torch.stack(codes, dim=-1)
 
     def continual(
