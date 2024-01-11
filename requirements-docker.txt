@@ -1,0 +1,25 @@
+soundfile
+numpy
+torch --index-url https://download.pytorch.org/whl/cu118
+torchvision --index-url https://download.pytorch.org/whl/cu118
+torchaudio --index-url https://download.pytorch.org/whl/cu118
+tokenizers
+encodec
+langid
+wget
+unidecode
+pyopenjtalk-prebuilt
+pypinyin
+inflect
+cn2an
+jieba
+eng_to_ipa
+openai-whisper
+phonemizer==3.2.0
+matplotlib
+gradio==4.3.0
+nltk
+sudachipy
+sudachidict_core
+vocos
+wavio

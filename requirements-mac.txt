@@ -1,0 +1,28 @@
+soundfile
+numpy
+--pre torch --index-url https://download.pytorch.org/whl/nightly/cpu
+--pre torchvision --index-url https://download.pytorch.org/whl/nightly/cpu
+--pre torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu
+tokenizers
+encodec
+langid
+wget
+unidecode
+pyopenjtalk-prebuilt
+pypinyin
+inflect
+cn2an
+jieba
+eng_to_ipa
+openai-whisper
+phonemizer==3.2.0
+matplotlib
+gradio==4.3.0
+nltk
+sudachipy
+sudachidict_core
+vocos
+ffmpeg
+fastapi
+uvicorn
+wavio
