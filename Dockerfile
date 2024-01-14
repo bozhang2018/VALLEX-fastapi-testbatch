@@ -25,5 +25,5 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 # Copy your FastAPI application
 COPY ./app /app
 
-CMD ["uvicorn", "main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "main:app", "--reload", "--proxy-headers", "--host", "0.0.0.0", "--port", "80"]
 
