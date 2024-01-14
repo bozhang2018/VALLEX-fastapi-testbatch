@@ -232,7 +232,7 @@ def infer_from_audio(text, language, accent, audio_prompt, record_audio_prompt, 
     global model, text_collater, text_tokenizer, audio_tokenizer
     audio_prompt = audio_prompt if audio_prompt is not None else record_audio_prompt
     sr, wav_pr = audio_prompt
-    print("gr called infer_from audio function.")
+    print(f"gr called infer_from audio function.")
 
     if not isinstance(wav_pr, torch.FloatTensor):
         wav_pr = torch.FloatTensor(wav_pr)

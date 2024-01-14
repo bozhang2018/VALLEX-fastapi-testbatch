@@ -601,8 +601,8 @@ class VALLE(VALLF):
                 #     y = worst_beam.unsqueeze(0)
                 # else:
                 #     y = best_beam.unsqueeze(0)
-                print("Model is running ar decoder.")
-                print(f"VALL-E EOS [{y.shape[0]} -> {2}]") # show batch_size
+                print(f"Model is running ar decoder.")
+                print(f"VALL-E EOS [{y.shape[0]} -> 2]") # show batch_size
                 break
 
             y = torch.concat([y, samples], dim=1)
@@ -633,7 +633,7 @@ class VALLE(VALLF):
             ########################
 
         x = self.nar_text_embedding(text)
-        print("Model is running nar decoder.")
+        print(f"Model is running nar decoder.")
         # Add language embedding
         prompt_language_id = torch.LongTensor(np.array([self.language_ID[prompt_language]])).to(x.device)
         if isinstance(text_language, str):
