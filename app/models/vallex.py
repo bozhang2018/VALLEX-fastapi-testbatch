@@ -691,13 +691,14 @@ class VALLE(VALLF):
                 logits = predict_layer(xy_dec[:, text_len + prefix_len :])
 
                 samples = torch.argmax(logits, dim=-1)
+                print(f"VALL-E NAR samples [{list(samples.shape)}]") # show batch_size
                 codes.append(samples)
 
                 if i < self.num_quantizers - 2:
                     y_emb[:, prefix_len:] += embedding_layer(samples)
 
         assert len(codes) == self.num_quantizers
-        print(f"VALL-E NAR [{codes.shape[0]} -> {codes.shape[1]}]") # show batch_size
+        print(f"VALL-E NAR codes [{len(codes)}]") # show len(codes)
         return torch.stack(codes, dim=-1)
 
     def continual(
