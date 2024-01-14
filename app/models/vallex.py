@@ -493,12 +493,12 @@ class VALLE(VALLF):
         assert torch.all(x_lens > 0)
 
         # NOTE: x has been padded in TextTokenCollater
-        text = x
-        x = self.ar_text_embedding(text)
         ######################
         # test: duplicate x, make it with dimension (2, S), where 2 is batch_size
         x = x.repeat(2, 1)
         #######################
+        text = x
+        x = self.ar_text_embedding(text)
         # Add language embedding
         prompt_language_id = torch.LongTensor(np.array([self.language_ID[prompt_language]])).to(x.device)
         if isinstance(text_language, str):
